@@ -3,14 +3,13 @@ const app = express();
 const port = 3002
 const connection = require('./data/db')
 
+
+const moviesRouter = require('./routers/movies')
 app.use(express.json())
-
-
+app.use('/movies', moviesRouter)
 
 
 //middlewares
-
-
 const serverError = (err, req, res, next) => {
     console.error(err.stack)
     res.status(500)
@@ -30,9 +29,10 @@ const notFound = (req, res, next) => {
 }
 
 
-app.use(serverError)
 
 app.use(notFound)
+app.use(serverError)
+
 
 
 app.listen(port, () => {
