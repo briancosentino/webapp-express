@@ -2,6 +2,7 @@ const express = require('express')
 const app = express();
 const port = 3002
 const connection = require('./data/db')
+console.log('im in');
 
 
 const moviesRouter = require('./routers/movies')
