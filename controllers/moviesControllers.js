@@ -16,11 +16,33 @@ function show(req, res) {
     const { id } = req.params;
     connection.query(sql, [id], (err, results) => {
         if (err) return res.status(500).json({ error: 'error durying showing' })
-        res.send(results[0])
+        res.send(results)
 
     })
 }
+function store(req, res) {
+    const { movie_id, name, vote, text } = req.body;
+
+    const sql = 'INSERT INTO reviews (movie_id, name, vote, text) VALUES (?, ?, ?, ?)';
+
+    connection.query(sql, [movie_id, name, vote, text], (err, result) => {
+        if (err) {
+            console.error('Query error:', err);
+            return res.status(500).json({
+                error: 'Errore durante il salvataggio',
+                details: err.message
+            });
+        }
+
+        res.status(201).json({
+            message: 'Recensione aggiunta con successo',
+            id: result.insertId
+        });
+    });
+}
+
 module.exports = {
     index,
     show,
+    store,
 }
