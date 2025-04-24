@@ -6,7 +6,7 @@ const connection = require('./data/db')
 console.log('im in');
 
 app.use(cors({
-    origin: 'http://localhost:5173'
+    origin: 'http://localhost:5174'
 }))
 
 const moviesRouter = require('./routers/movies')
